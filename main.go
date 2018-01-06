@@ -3,11 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/technowar/crypto/lib"
-	"github.com/technowar/crypto/utils"
 	"os"
 	"runtime"
 	"strings"
+
+	"github.com/technowar/crypto/lib"
+	"github.com/technowar/crypto/utils"
 )
 
 func main() {
