@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
+	"github.com/dustin/go-humanize"
 	"github.com/olekukonko/tablewriter"
 )
 
@@ -15,10 +17,11 @@ type Coin struct {
 	Name               string
 	Symbol             string
 	Price_usd          string
+	Market_cap_usd     string
+	Available_supply   string
 	Price_btc          string
 	Percent_change_1h  string
 	Percent_change_24h string
-	Percent_change_7d  string
 }
 
 type Coins struct {
@@ -47,15 +50,23 @@ func Watch() {
 	data := [][]string{}
 
 	for _, item := range coins.Coin {
+		capFloat, _ := strconv.ParseFloat(item.Market_cap_usd, 64)
+		cap := fmt.Sprintf("$%v", humanize.Commaf(capFloat))
+		priceFloat, _ := strconv.ParseFloat(item.Price_usd, 64)
+		price := fmt.Sprintf("$%v", humanize.Commaf(priceFloat))
+		supplyFloat, _ := strconv.ParseFloat(item.Available_supply, 64)
+		supply := fmt.Sprintf("%v %v", humanize.Commaf(supplyFloat), item.Symbol)
+
 		data = append(data, []string{
 			item.Rank,
 			item.Symbol,
 			item.Name,
-			item.Price_usd,
+			cap,
+			price,
 			item.Price_btc,
+			supply,
 			item.Percent_change_1h,
 			item.Percent_change_24h,
-			item.Percent_change_7d,
 		})
 	}
 
@@ -67,14 +78,16 @@ func Watch() {
 		"Rank",
 		"Symbol",
 		"Name",
-		"Price [USD]",
+		"Market Cap",
+		"Price",
 		"Price [BTC]",
-		"Percent Change [1h]",
-		"Percent Change [24h]",
-		"Percent Change [7d]",
+		"Circulating Supply",
+		"Change [1h]",
+		"Change [24h]",
 	})
 	table.SetColumnColor(tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiBlackColor},
+		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
