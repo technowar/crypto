@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	"github.com/olekukonko/tablewriter"
 )
 
 type Coin struct {
@@ -36,7 +38,19 @@ func Watch() {
 	}
 
 	coins := Coins{*coin}
+	data := [][]string{}
 
 	for _, item := range coins.Coin {
+		data = append(data, []string{item.Name, item.Symbol, item.Rank})
 	}
+
+	table := tablewriter.NewWriter(os.Stdout)
+
+	table.SetHeader([]string{"Name", "Symbol", "Rank"})
+
+	for _, item := range data {
+		table.Append(item)
+	}
+
+	table.Render()
 }

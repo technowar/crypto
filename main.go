@@ -1,10 +1,10 @@
 package main
 
 import (
-	"./lib"
-	"./utils"
 	"bufio"
 	"fmt"
+	"github.com/technowar/crypto/lib"
+	"github.com/technowar/crypto/utils"
 	"os"
 	"runtime"
 	"strings"
