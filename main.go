@@ -21,16 +21,24 @@ func main() {
 
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
+		texts := strings.Split(text, " ")
 
-		switch text {
-		case "help":
+		if texts[0] == "coin" {
+			utils.Clear(runtime.GOOS)
+
+			switch len(texts) <= 1 {
+			case true:
+				lib.Crypto("BTC")
+			default:
+				lib.Crypto(strings.ToUpper(texts[1]))
+			}
+		} else if text == "help" {
 			utils.Usage()
-		case "watch":
+		} else if text == "watch" {
 			utils.Clear(runtime.GOOS)
 			lib.Watch()
-		default:
+		} else {
 			fmt.Printf("Bad option: %v\n", text)
-
 			utils.Usage()
 		}
 	}

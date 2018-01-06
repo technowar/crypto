@@ -1,6 +1,7 @@
 package lib
 
 type Coin struct {
+	Id                 string
 	Rank               string
 	Name               string
 	Symbol             string
