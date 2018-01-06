@@ -23,11 +23,14 @@ func main() {
 		text = strings.Replace(text, "\n", "", -1)
 
 		switch text {
-		case "coins":
+		case "help":
+			utils.Usage()
+		case "watch":
 			utils.Clear(runtime.GOOS)
 			lib.Watch()
 		default:
-			utils.Clear(runtime.GOOS)
+			fmt.Printf("Bad option: %v\n", text)
+
 			utils.Usage()
 		}
 	}

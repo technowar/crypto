@@ -12,22 +12,6 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
-type Coin struct {
-	Rank               string
-	Name               string
-	Symbol             string
-	Price_usd          string
-	Market_cap_usd     string
-	Available_supply   string
-	Price_btc          string
-	Percent_change_1h  string
-	Percent_change_24h string
-}
-
-type Coins struct {
-	Coin []Coin
-}
-
 func Watch() {
 	response, err := http.Get("https://api.coinmarketcap.com/v1/ticker/?limit=10")
 
