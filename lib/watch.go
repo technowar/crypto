@@ -54,6 +54,7 @@ func Watch() {
 		cap := fmt.Sprintf("$%v", humanize.Commaf(capFloat))
 		priceFloat, _ := strconv.ParseFloat(item.Price_usd, 64)
 		price := fmt.Sprintf("$%v", humanize.Commaf(priceFloat))
+		priceBtc := fmt.Sprintf("%v BTC", item.Price_btc)
 		supplyFloat, _ := strconv.ParseFloat(item.Available_supply, 64)
 		supply := fmt.Sprintf("%v %v", humanize.Commaf(supplyFloat), item.Symbol)
 
@@ -63,7 +64,7 @@ func Watch() {
 			item.Name,
 			cap,
 			price,
-			item.Price_btc,
+			priceBtc,
 			supply,
 			item.Percent_change_1h,
 			item.Percent_change_24h,
@@ -80,7 +81,7 @@ func Watch() {
 		"Name",
 		"Market Cap",
 		"Price",
-		"Price [BTC]",
+		"Price",
 		"Circulating Supply",
 		"Change [1h]",
 		"Change [24h]",
