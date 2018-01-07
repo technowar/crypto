@@ -13,7 +13,9 @@ import (
 
 func main() {
 	utils.Clear(runtime.GOOS)
+	fmt.Println("Fetching data...")
 
+	coinList := lib.Fetch()
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
@@ -28,15 +30,15 @@ func main() {
 
 			switch len(texts) <= 1 {
 			case true:
-				lib.Crypto("BTC")
+				lib.Crypto("BTC", coinList)
 			default:
-				lib.Crypto(strings.ToUpper(texts[1]))
+				lib.Crypto(strings.ToUpper(texts[1]), coinList)
 			}
-		} else if text == "help" {
-			utils.Usage()
 		} else if text == "watch" {
 			utils.Clear(runtime.GOOS)
-			lib.Watch()
+			lib.Watch(coinList)
+		} else if text == "help" {
+			utils.Usage()
 		} else {
 			fmt.Printf("Bad option: %v\n", text)
 			utils.Usage()
