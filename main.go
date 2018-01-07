@@ -18,6 +18,8 @@ func main() {
 	coinList, now := lib.Fetch()
 	reader := bufio.NewReader(os.Stdin)
 
+	utils.Clear(runtime.GOOS)
+
 	for {
 		fmt.Print("> ")
 
@@ -26,8 +28,6 @@ func main() {
 		texts := strings.Split(text, " ")
 
 		if texts[0] == "coin" {
-			utils.Clear(runtime.GOOS)
-
 			switch len(texts) <= 1 {
 			case true:
 				lib.Crypto("BTC", coinList, now)
@@ -40,8 +40,7 @@ func main() {
 		} else if text == "help" {
 			utils.Usage()
 		} else {
-			fmt.Printf("Bad option: %v\n", text)
-			utils.Usage()
+			fmt.Printf("Bad option: %v\n\n", text)
 		}
 	}
 }
