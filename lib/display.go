@@ -18,7 +18,7 @@ func Display(coins Coins, now time.Time) {
 		cap := fmt.Sprintf("$%v", humanize.Commaf(capFloat))
 		priceFloat, _ := strconv.ParseFloat(item.Price_usd, 64)
 		price := fmt.Sprintf("$%v", humanize.Commaf(priceFloat))
-		priceBtc := fmt.Sprintf("%v BTC", item.Price_btc)
+		priceBtc := fmt.Sprintf("฿%v", item.Price_btc)
 		supplyFloat, _ := strconv.ParseFloat(item.Available_supply, 64)
 		supply := fmt.Sprintf("%v %v", humanize.Commaf(supplyFloat), item.Symbol)
 
