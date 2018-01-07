@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 )
 
-func Fetch() Coins {
+func Fetch() (Coins, time.Time) {
 	response, err := http.Get("https://api.coinmarketcap.com/v1/ticker/?limit=1000")
 
 	defer response.Body.Close()
@@ -27,6 +28,7 @@ func Fetch() Coins {
 	}
 
 	coins := Coins{*coin}
+	now := time.Now()
 
-	return coins
+	return coins, now
 }

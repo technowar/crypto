@@ -1,8 +1,11 @@
 package lib
 
-import "strings"
+import (
+	"strings"
+	"time"
+)
 
-func Crypto(crypto string, coinList Coins) {
+func Crypto(crypto string, coinList Coins, now time.Time) {
 	detail := []Coin{}
 
 	for _, item := range coinList.Coin {
@@ -11,5 +14,5 @@ func Crypto(crypto string, coinList Coins) {
 		}
 	}
 
-	Display(Coins{detail})
+	Display(Coins{detail}, now)
 }

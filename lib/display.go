@@ -10,7 +10,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
-func Display(coins Coins) {
+func Display(coins Coins, now time.Time) {
 	data := [][]string{}
 
 	for _, item := range coins.Coin {
@@ -36,7 +36,6 @@ func Display(coins Coins) {
 	}
 
 	table := tablewriter.NewWriter(os.Stdout)
-	now := time.Now()
 	message := fmt.Sprintf("Updated: %v", now.Format(time.RFC1123))
 
 	table.SetHeader([]string{
