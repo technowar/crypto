@@ -11,6 +11,7 @@ type Coin struct {
 	Price_btc          string
 	Percent_change_1h  string
 	Percent_change_24h string
+	Percent_change_7d  string
 }
 
 type Coins struct {
