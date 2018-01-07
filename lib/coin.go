@@ -7,10 +7,12 @@ import (
 )
 
 func Crypto(crypto string, coinList Coins, now time.Time) {
+	var id string
 	detail := []Coin{}
 
 	for _, item := range coinList.Coin {
 		if item.Symbol == crypto || strings.ToUpper(item.Id) == crypto {
+			id = item.Id
 			detail = append(detail, item)
 		}
 	}
@@ -19,5 +21,6 @@ func Crypto(crypto string, coinList Coins, now time.Time) {
 		fmt.Printf("%v: Unable to locate.\n\n", crypto)
 	} else {
 		Display(Coins{detail}, now)
+		fmt.Printf("URL: https://coinmarketcap.com/currencies/%v/\n", id)
 	}
 }
