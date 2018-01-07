@@ -16,7 +16,7 @@ func Crypto(crypto string, coinList Coins, now time.Time) {
 	}
 
 	if len(detail) == 0 {
-		fmt.Printf("Unable to find %v in the database.\n\n", crypto)
+		fmt.Printf("%v: Unable to locate.\n\n", crypto)
 	} else {
 		Display(Coins{detail}, now)
 	}

@@ -3,11 +3,13 @@ package lib
 import (
 	"fmt"
 	"os"
+	"runtime"
 	"strconv"
 	"time"
 
 	"github.com/dustin/go-humanize"
 	"github.com/olekukonko/tablewriter"
+	"github.com/technowar/crypto/utils"
 )
 
 func Display(coins Coins, now time.Time) {
@@ -64,5 +66,6 @@ func Display(coins Coins, now time.Time) {
 		table.Append(item)
 	}
 
+	utils.Clear(runtime.GOOS)
 	table.Render()
 }

@@ -42,7 +42,6 @@ func main() {
 				lib.Crypto(strings.ToUpper(texts[1]), coinList, now)
 			}
 		} else if text == "watch" {
-			utils.Clear(runtime.GOOS)
 			lib.Watch(coinList, now)
 		} else if text == "help" {
 			utils.Usage()
