@@ -6,6 +6,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/technowar/crypto/lib"
 	"github.com/technowar/crypto/utils"
@@ -26,6 +27,12 @@ func main() {
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
 		texts := strings.Split(text, " ")
+		newNow := time.Now().Unix()
+		after := now.Add(5 * time.Minute).Unix()
+
+		if newNow > after {
+			coinList, now = lib.Fetch()
+		}
 
 		if texts[0] == "coin" {
 			switch len(texts) <= 1 {

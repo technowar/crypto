@@ -32,7 +32,6 @@ func Display(coins Coins, now time.Time) {
 			supply,
 			item.Percent_change_1h,
 			item.Percent_change_24h,
-			item.Percent_change_7d,
 		})
 	}
 
@@ -49,11 +48,9 @@ func Display(coins Coins, now time.Time) {
 		"Circulating Supply",
 		"Change [1h]",
 		"Change [24h]",
-		"Change [7d]",
 	})
 	table.SetColumnColor(tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiRedColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgHiBlackColor},
-		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
 		tablewriter.Colors{tablewriter.Bold, tablewriter.FgBlackColor},
