@@ -41,6 +41,20 @@ func main() {
 			default:
 				lib.Crypto(strings.ToUpper(texts[1]), coinList, now)
 			}
+		} else if texts[0] == "price" {
+			from := "BTC"
+			to := "BTC"
+
+			if len(texts) == 2 {
+				from = texts[1]
+			}
+
+			if len(texts) >= 3 {
+				from = texts[1]
+				to = texts[2]
+			}
+
+			lib.Price(strings.ToUpper(from), strings.ToUpper(to))
 		} else if text == "watch" {
 			lib.Watch(coinList, now)
 		} else if text == "help" {
