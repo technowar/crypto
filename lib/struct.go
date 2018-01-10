@@ -16,3 +16,14 @@ type Coin struct {
 type Coins struct {
 	Coin []Coin
 }
+
+type To struct {
+	Currency string
+	Value    float64
+}
+
+type SortTo []To
+
+func (a SortTo) Len() int           { return len(a) }
+func (a SortTo) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a SortTo) Less(i, j int) bool { return a[i].Currency < a[j].Currency }
