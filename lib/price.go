@@ -33,6 +33,11 @@ func Price(from, to string) {
 
 	lastUpdate := respMap["RAW"][from][to].Lastupdate
 	now := time.Unix(lastUpdate, 0)
+	resp := respMap["RAW"][from]
 
-	Compare(respMap["RAW"][from], now)
+	if len(resp) == 0 {
+		fmt.Printf("%v/%v: Unable to locate.\n\n", from, to)
+	} else {
+		Compare(resp, now)
+	}
 }
