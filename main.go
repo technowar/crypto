@@ -57,6 +57,8 @@ func main() {
 			lib.Price(strings.ToUpper(from), strings.ToUpper(to))
 		} else if text == "watch" {
 			lib.Watch(coinList, now)
+		} else if text == "clear" || text == "cls" {
+			utils.Clear(runtime.GOOS)
 		} else if text == "help" {
 			utils.Usage()
 		} else {

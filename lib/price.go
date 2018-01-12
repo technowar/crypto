@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"time"
 )
 
 func Price(from, to string) {
@@ -30,5 +31,8 @@ func Price(from, to string) {
 
 	json.Unmarshal(data, &respMap)
 
-	fmt.Println(respMap)
+	lastUpdate := respMap["RAW"][from][to].Lastupdate
+	now := time.Unix(lastUpdate, 0)
+
+	Compare(respMap["RAW"][from], now)
 }

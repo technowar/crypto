@@ -24,4 +24,5 @@ type To struct {
 	Price           float64
 	Mktcap          float64
 	Changepct24hour float64
+	Lastupdate      int64
 }
