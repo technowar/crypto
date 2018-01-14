@@ -37,9 +37,9 @@ func main() {
 		if texts[0] == "coin" {
 			switch len(texts) <= 1 {
 			case true:
-				lib.Crypto("BTC", coinList, now)
+				lib.Details("BTC", coinList, now)
 			default:
-				lib.Crypto(strings.ToUpper(texts[1]), coinList, now)
+				lib.Details(strings.ToUpper(texts[1]), coinList, now)
 			}
 		} else if texts[0] == "price" {
 			from := "BTC"
@@ -56,7 +56,7 @@ func main() {
 
 			lib.Price(strings.ToUpper(from), strings.ToUpper(to))
 		} else if text == "watch" {
-			lib.Watch(coinList, now)
+			lib.Details("", coinList, now)
 		} else if text == "clear" || text == "cls" {
 			utils.Clear(runtime.GOOS)
 		} else if text == "help" {
