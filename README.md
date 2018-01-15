@@ -10,10 +10,10 @@ Commands available:
   coin <coin>        Display details of specific coin. Defaults to Bitcoin.
     args:
       <coin>  [<symbol>|<name>]
-  price <from> <to>  Converts price of specific coin. Defaults all arguments to Bitcoin.
+  price <from> <to>  Converts price. Defaults all arguments to Bitcoin.
     args:
-      <from>  [<symbol>]
-      <to>    [<symbol>]
+      <from>  [<symbol>|<currency>]
+      <to>    [<symbol>|<currency>]
 ```
 
 > \> watch

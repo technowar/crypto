@@ -10,8 +10,8 @@ func Usage() {
 	fmt.Println("  coin <coin>        Display details of specific coin. Defaults to Bitcoin.")
 	fmt.Println("    args:")
 	fmt.Println("      <coin>  [<symbol>|<name>]")
-	fmt.Println("  price <from> <to>  Converts price of specific coin. Defaults all arguments to Bitcoin.")
+	fmt.Println("  price <from> <to>  Converts price. Defaults all arguments to Bitcoin.")
 	fmt.Println("    args:")
-	fmt.Println("      <from>  [<symbol>]")
-	fmt.Println("      <to>    [<symbol>]")
+	fmt.Println("      <from>  [<symbol>|<currency>]")
+	fmt.Println("      <to>    [<symbol>|<currency>]")
 }
