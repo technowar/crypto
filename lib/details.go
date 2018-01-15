@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func Details(crypto string, coinList Coins, now time.Time) {
+func CoinDetails(crypto string, coinList Coins, now time.Time) {
 	detail := []Coin{}
 
 	switch len(crypto) {

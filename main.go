@@ -16,7 +16,7 @@ func main() {
 	utils.Clear(runtime.GOOS)
 	fmt.Println("Fetching data...")
 
-	coinList, now := lib.Fetch()
+	coinList, now := lib.FetchCoins()
 	reader := bufio.NewReader(os.Stdin)
 
 	utils.Clear(runtime.GOOS)
@@ -31,15 +31,15 @@ func main() {
 		after := now.Add(5 * time.Minute).Unix()
 
 		if newNow > after {
-			coinList, now = lib.Fetch()
+			coinList, now = lib.FetchCoins()
 		}
 
 		if texts[0] == "coin" {
 			switch len(texts) <= 1 {
 			case true:
-				lib.Details("BTC", coinList, now)
+				lib.CoinDetails("BTC", coinList, now)
 			default:
-				lib.Details(strings.ToUpper(texts[1]), coinList, now)
+				lib.CoinDetails(strings.ToUpper(texts[1]), coinList, now)
 			}
 		} else if texts[0] == "price" {
 			from := "BTC"
@@ -54,9 +54,9 @@ func main() {
 				to = texts[2]
 			}
 
-			lib.Price(strings.ToUpper(from), strings.ToUpper(to))
+			lib.FetchPrice(strings.ToUpper(from), strings.ToUpper(to))
 		} else if text == "watch" {
-			lib.Details("", coinList, now)
+			lib.CoinDetails("", coinList, now)
 		} else if text == "clear" || text == "cls" {
 			utils.Clear(runtime.GOOS)
 		} else if text == "help" {
