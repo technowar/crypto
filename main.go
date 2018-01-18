@@ -18,6 +18,7 @@ func main() {
 
 	coinList, now := lib.FetchCoins()
 	reader := bufio.NewReader(os.Stdin)
+	tickerDone := make(chan struct{})
 
 	utils.Clear(runtime.GOOS)
 
@@ -27,20 +28,22 @@ func main() {
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
 		texts := strings.Split(text, " ")
-		newNow := time.Now().Unix()
-		after := now.Add(5 * time.Minute).Unix()
 
-		if newNow > after {
-			coinList, now = lib.FetchCoins()
+		select {
+		case tickerDone <- struct{}{}:
+		default:
 		}
 
 		if texts[0] == "coin" {
-			switch len(texts) <= 1 {
-			case true:
-				lib.CoinDetails("BTC", coinList, now)
-			default:
-				lib.CoinDetails(strings.ToUpper(texts[1]), coinList, now)
+			coin := "BTC"
+
+			if len(texts) >= 2 {
+				coin = strings.ToUpper(texts[1])
 			}
+
+			lib.CoinDetails("BTC", coinList, now)
+
+			go timeTick("coin", coin, "", 5, tickerDone)
 		} else if texts[0] == "price" {
 			from := "BTC"
 			to := "BTC"
@@ -55,14 +58,42 @@ func main() {
 			}
 
 			lib.FetchPrice(strings.ToUpper(from), strings.ToUpper(to))
+
+			go timeTick("price", strings.ToUpper(from), strings.ToUpper(to), 1, tickerDone)
 		} else if text == "watch" {
 			lib.CoinDetails("", coinList, now)
+
+			go timeTick("watch", "", "", 5, tickerDone)
 		} else if text == "clear" || text == "cls" {
 			utils.Clear(runtime.GOOS)
 		} else if text == "help" {
 			utils.Usage()
 		} else {
 			fmt.Printf("Bad option: %v\n\n", text)
+		}
+	}
+}
+
+func timeTick(format, from, to string, tick int, done <-chan struct{}) {
+	tickChan := time.NewTicker(time.Minute * time.Duration(tick))
+
+	for {
+		select {
+		case <-tickChan.C:
+			switch format {
+			case "watch":
+				coinList, now := lib.FetchCoins()
+
+				lib.CoinDetails("", coinList, now)
+			case "coin":
+				coinList, now := lib.FetchCoins()
+
+				lib.CoinDetails(from, coinList, now)
+			case "price":
+				lib.FetchPrice(from, to)
+			}
+		case <-done:
+			return
 		}
 	}
 }
