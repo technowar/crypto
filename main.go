@@ -41,7 +41,7 @@ func main() {
 				coin = strings.ToUpper(texts[1])
 			}
 
-			lib.CoinDetails("BTC", coinList, now)
+			lib.CoinDetails(coin, coinList, now)
 
 			go timeTick("coin", coin, "", 5, tickerDone)
 		} else if texts[0] == "price" {
